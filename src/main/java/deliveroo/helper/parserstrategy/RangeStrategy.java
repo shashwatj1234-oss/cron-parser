@@ -1,7 +1,6 @@
 package deliveroo.helper.parserstrategy;
 
 import deliveroo.helper.BaseParser;
-
 import java.util.StringJoiner;
 
 public class RangeStrategy implements ParseStrategy {
