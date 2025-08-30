@@ -1,6 +1,6 @@
 package deliveroo.helper.parserstrategy;
 
-import deliveroo.helper.StrategyContext;
+import deliveroo.helper.BaseParser;
 
 import java.util.StringJoiner;
 
@@ -11,7 +11,7 @@ public class StepStrategy implements ParseStrategy {
     }
 
     @Override
-    public String parse(String input, int low, int high, StrategyContext context) {
+    public String parse(String input, int low, int high, BaseParser context) {
         String[] parts = input.split("/", 2);
         String left = parts[0];
         int step = parsePositiveInt(parts[1]);

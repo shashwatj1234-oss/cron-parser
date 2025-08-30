@@ -5,12 +5,13 @@ import deliveroo.helper.parserstrategy.ParseStrategy;
 import deliveroo.helper.parserstrategy.RangeStrategy;
 import deliveroo.helper.parserstrategy.SingleValueStrategy;
 import deliveroo.helper.parserstrategy.StepStrategy;
+import deliveroo.helper.parserstrategy.StrategyContext;
 import deliveroo.helper.parserstrategy.WildcardStrategy;
 
 import java.util.List;
 import java.util.StringJoiner;
 
-public abstract class StrategyContext implements FieldParser, deliveroo.helper.parserstrategy.StrategyContext {
+public abstract class BaseParser implements FieldParser, StrategyContext {
     private final int low;
     private final int high;
     private final String name;
@@ -19,7 +20,7 @@ public abstract class StrategyContext implements FieldParser, deliveroo.helper.p
     private final List<ParseStrategy> strategies;
 
     /** Default: uses the standard strategies */
-    protected StrategyContext(int low, int high, String name) {
+    protected BaseParser(int low, int high, String name) {
         this(low, high, name, List.of(
                 new CommaStrategy(),
                 new StepStrategy(),
@@ -30,7 +31,7 @@ public abstract class StrategyContext implements FieldParser, deliveroo.helper.p
     }
 
     /** Manually Inject Strategy */
-    protected StrategyContext(int low, int high, String name, List<ParseStrategy> strategies) {
+    protected BaseParser(int low, int high, String name, List<ParseStrategy> strategies) {
         this.low = low;
         this.high = high;
         this.name = name;
@@ -73,7 +74,7 @@ public abstract class StrategyContext implements FieldParser, deliveroo.helper.p
     @Override
     public String expandRange(int start, int end) {
         if (start > end) {
-            throw new IllegalArgumentException("Invalid range " + start + "-" + end + " for " + parser.name());
+            throw new IllegalArgumentException("Invalid range " + start + "-" + end + " for " + name);
         }
         StringJoiner j = new StringJoiner(" ");
         for (int i = start; i <= end; i++) j.add(String.valueOf(i));
