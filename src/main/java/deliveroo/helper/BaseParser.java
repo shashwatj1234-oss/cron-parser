@@ -15,11 +15,10 @@ public abstract class BaseParser implements FieldParser, StrategyContext {
     private final int low;
     private final int high;
     private final String name;
-    private static final int NAME_COL = 14;
+    private static final int NAME_COL_LENGTH = 14;
 
     private final List<ParseStrategy> strategies;
 
-    /** Default: uses the standard strategies */
     protected BaseParser(int low, int high, String name) {
         this(low, high, name, List.of(
                 new CommaStrategy(),
@@ -30,7 +29,7 @@ public abstract class BaseParser implements FieldParser, StrategyContext {
         ));
     }
 
-    /** Manually Inject Strategy */
+    /*If we want strategy in different order*/
     protected BaseParser(int low, int high, String name, List<ParseStrategy> strategies) {
         this.low = low;
         this.high = high;
@@ -44,7 +43,7 @@ public abstract class BaseParser implements FieldParser, StrategyContext {
 
     @Override
     public String parse(String input) {
-        return String.format("%-" + NAME_COL + "s%s", name, dispatch(input.strip()));
+        return String.format("%-" + NAME_COL_LENGTH + "s%s", name, dispatch(input.strip()));
     }
 
 

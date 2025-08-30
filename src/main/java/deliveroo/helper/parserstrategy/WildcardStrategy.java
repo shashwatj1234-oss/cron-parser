@@ -1,7 +1,5 @@
 package deliveroo.helper.parserstrategy;
 
-import deliveroo.helper.BaseParser;
-
 import java.util.StringJoiner;
 
 public class WildcardStrategy implements ParseStrategy {
@@ -11,7 +9,7 @@ public class WildcardStrategy implements ParseStrategy {
     }
 
     @Override
-    public String parse(String input, int low, int high, BaseParser context) {
+    public String parse(String input, int low, int high, StrategyContext context) {
         StringJoiner j = new StringJoiner(" ");
         for (int i = low; i <= high; i++) j.add(String.valueOf(i));
         return j.toString();

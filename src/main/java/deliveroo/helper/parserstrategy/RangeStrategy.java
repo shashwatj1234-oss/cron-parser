@@ -1,7 +1,5 @@
 package deliveroo.helper.parserstrategy;
 
-import deliveroo.helper.BaseParser;
-
 public class RangeStrategy implements ParseStrategy {
     @Override
     public boolean isApplicable(String input) {
@@ -9,7 +7,7 @@ public class RangeStrategy implements ParseStrategy {
     }
 
     @Override
-    public String parse(String input, int low, int high, BaseParser context) {
+    public String parse(String input, int low, int high, StrategyContext context) {
         String[] bounds = input.split("-", 2);
         context.validate(bounds[0]);
         context.validate(bounds[1]);
