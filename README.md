@@ -62,30 +62,5 @@ mvn test
 
 ---
 
-## Features
-- Supports:
-    - Wildcards (`*`)
-    - Ranges (`a-b`)
-    - Steps (`*/n`, `a-b/n`, `a/n`)
-    - Lists (`1,5,10-12`)
-- Field bounds:
-    - Minute: `0–59`
-    - Hour: `0–23`
-    - Day of Month: `1–31`
-    - Month: `1–12`
-    - Day of Week: `0–6` (Sunday = 0)
-- Throws clear exceptions for invalid or out-of-range values.
-- Modular design with per-field parsers for easy extension.
-
----
-
-## Possible Extensions
-- Month and day-of-week names (`JAN..DEC`, `MON..SUN`)
-- Special macros (`@yearly`, `@monthly`, etc.`)
-- Next-run calculator given a base timestamp
-- JSON or other structured output
-
----
-
 ## Author
 **Shashwat Jatav**
