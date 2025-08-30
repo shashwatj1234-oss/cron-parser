@@ -1,6 +1,6 @@
 package deliveroo.helper.parserstrategy;
 
-import deliveroo.helper.BaseParser;
+import deliveroo.helper.StrategyContext;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -12,9 +12,9 @@ public class CommaStrategy implements ParseStrategy {
     }
 
     @Override
-    public String parse(String input, int low, int high, BaseParser parser) {
+    public String parse(String input, int low, int high, StrategyContext context) {
         return Arrays.stream(input.split(","))
-                .map(s -> parser.dispatch(s.trim()))
+                .map(s -> context.dispatch(s.trim()))
                 .collect(Collectors.joining(" "));
     }
 }

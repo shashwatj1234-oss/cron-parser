@@ -1,6 +1,6 @@
 package deliveroo.helper.parserstrategy;
 
-import deliveroo.helper.BaseParser;
+import deliveroo.helper.StrategyContext;
 
 public class SingleValueStrategy implements ParseStrategy {
     @Override
@@ -9,8 +9,8 @@ public class SingleValueStrategy implements ParseStrategy {
     }
 
     @Override
-    public String parse(String input, int low, int high, BaseParser parser) {
-        parser.validate(input);
+    public String parse(String input, int low, int high, StrategyContext context) {
+        context.validate(input);
         return input;
     }
 }

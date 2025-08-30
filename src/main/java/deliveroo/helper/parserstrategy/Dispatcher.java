@@ -1,4 +1,4 @@
-package deliveroo.helper;
+package deliveroo.helper.parserstrategy;
 
 public interface Dispatcher {
     String dispatch(String input);

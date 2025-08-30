@@ -1,8 +1,8 @@
 package deliveroo.helper.parserstrategy;
 
-import deliveroo.helper.BaseParser;
+import deliveroo.helper.StrategyContext;
 
 public interface ParseStrategy {
     boolean isApplicable(String input);
-    String parse(String input, int low, int high, BaseParser parser);
+    String parse(String input, int low, int high, StrategyContext context);
 }

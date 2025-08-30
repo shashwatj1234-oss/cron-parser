@@ -8,8 +8,9 @@ import deliveroo.helper.parserstrategy.StepStrategy;
 import deliveroo.helper.parserstrategy.WildcardStrategy;
 
 import java.util.List;
+import java.util.StringJoiner;
 
-public abstract class BaseParser implements FieldParser, Dispatcher, ValueValidator {
+public abstract class StrategyContext implements FieldParser, deliveroo.helper.parserstrategy.StrategyContext {
     private final int low;
     private final int high;
     private final String name;
@@ -18,7 +19,7 @@ public abstract class BaseParser implements FieldParser, Dispatcher, ValueValida
     private final List<ParseStrategy> strategies;
 
     /** Default: uses the standard strategies */
-    protected BaseParser(int low, int high, String name) {
+    protected StrategyContext(int low, int high, String name) {
         this(low, high, name, List.of(
                 new CommaStrategy(),
                 new StepStrategy(),
@@ -29,7 +30,7 @@ public abstract class BaseParser implements FieldParser, Dispatcher, ValueValida
     }
 
     /** Manually Inject Strategy */
-    protected BaseParser(int low, int high, String name, List<ParseStrategy> strategies) {
+    protected StrategyContext(int low, int high, String name, List<ParseStrategy> strategies) {
         this.low = low;
         this.high = high;
         this.name = name;
@@ -67,5 +68,15 @@ public abstract class BaseParser implements FieldParser, Dispatcher, ValueValida
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(value + " is not a valid integer for " + name);
         }
+    }
+
+    @Override
+    public String expandRange(int start, int end) {
+        if (start > end) {
+            throw new IllegalArgumentException("Invalid range " + start + "-" + end + " for " + parser.name());
+        }
+        StringJoiner j = new StringJoiner(" ");
+        for (int i = start; i <= end; i++) j.add(String.valueOf(i));
+        return j.toString();
     }
 }

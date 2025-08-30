@@ -1,7 +1,6 @@
 package deliveroo.helper.parserstrategy;
 
-import deliveroo.helper.BaseParser;
-import java.util.StringJoiner;
+import deliveroo.helper.StrategyContext;
 
 public class RangeStrategy implements ParseStrategy {
     @Override
@@ -10,23 +9,14 @@ public class RangeStrategy implements ParseStrategy {
     }
 
     @Override
-    public String parse(String input, int low, int high, BaseParser parser) {
+    public String parse(String input, int low, int high, StrategyContext context) {
         String[] bounds = input.split("-", 2);
-        parser.validate(bounds[0]);
-        parser.validate(bounds[1]);
+        context.validate(bounds[0]);
+        context.validate(bounds[1]);
 
         int start = Integer.parseInt(bounds[0]);
         int end   = Integer.parseInt(bounds[1]);
 
-        return expandRange(start, end, parser);
-    }
-
-    private String expandRange(int start, int end, BaseParser parser) {
-        if (start > end) {
-            throw new IllegalArgumentException("Invalid range " + start + "-" + end + " for " + parser.name());
-        }
-        StringJoiner j = new StringJoiner(" ");
-        for (int i = start; i <= end; i++) j.add(String.valueOf(i));
-        return j.toString();
+        return context.expandRange(start, end);
     }
 }
