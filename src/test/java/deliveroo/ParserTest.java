@@ -102,4 +102,17 @@ public class ParserTest {
         String[] hoursLine = output.split("\n")[1].trim().split("\\s+");
         assertEquals("12", hoursLine[1]);
     }
+
+    @Test
+    void parserTest2() {
+        Parser parser = new Parser();
+        String input = "*/15 0 1,15,25-30 JAN 1-5 /usr/bin/find";
+        String output = parser.parse(input);
+
+        String[] namesTimesPairs = output.split("\n");
+        assertEquals(6, namesTimesPairs.length, "Should produce 6 lines");
+
+        String[] monthDetails = namesTimesPairs[3].trim().split("\\s+");
+        assertEquals(1, Integer.valueOf(monthDetails[1]));
+    }
 }

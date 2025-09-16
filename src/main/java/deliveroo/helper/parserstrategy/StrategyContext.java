@@ -5,4 +5,6 @@ public interface StrategyContext extends ValueValidator, Dispatcher {
     int low();
     int high();
     String name();
+
+    Integer convertToInt(String str);
 }

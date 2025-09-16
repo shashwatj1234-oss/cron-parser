@@ -8,7 +8,7 @@ public class SingleValueStrategy implements ParseStrategy {
 
     @Override
     public String parse(String input, int low, int high, StrategyContext context) {
-        context.validate(input);
-        return input;
+        context.validate(String.valueOf(context.convertToInt(input)));
+        return String.valueOf(context.convertToInt(input));
     }
 }

@@ -1,5 +1,7 @@
 package deliveroo.helper.parserstrategy;
 
+import deliveroo.helper.MonthParser;
+
 public class RangeStrategy implements ParseStrategy {
     @Override
     public boolean isApplicable(String input) {
@@ -9,12 +11,16 @@ public class RangeStrategy implements ParseStrategy {
     @Override
     public String parse(String input, int low, int high, StrategyContext context) {
         String[] bounds = input.split("-", 2);
-        context.validate(bounds[0]);
-        context.validate(bounds[1]);
+        int start = context.convertToInt(bounds[0]);
+        int end   =context.convertToInt(bounds[1]);
 
-        int start = Integer.parseInt(bounds[0]);
-        int end   = Integer.parseInt(bounds[1]);
+
+        context.validate(String.valueOf(start));
+        context.validate(String.valueOf(end));
+
 
         return context.expandRange(start, end);
     }
 }
+
+//1,15/1

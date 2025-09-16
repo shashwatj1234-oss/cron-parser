@@ -9,13 +9,14 @@ import deliveroo.helper.parserstrategy.StrategyContext;
 import deliveroo.helper.parserstrategy.WildcardStrategy;
 
 import java.util.List;
+import java.util.Map;
 import java.util.StringJoiner;
 
 public abstract class BaseParser implements FieldParser, StrategyContext {
     private final int low;
     private final int high;
     private final String name;
-    private static final int NAME_COL_LENGTH = 14;
+    protected static final int NAME_COL_LENGTH = 14;
 
     private final List<ParseStrategy> strategies;
 
@@ -78,5 +79,10 @@ public abstract class BaseParser implements FieldParser, StrategyContext {
         StringJoiner j = new StringJoiner(" ");
         for (int i = start; i <= end; i++) j.add(String.valueOf(i));
         return j.toString();
+    }
+
+    @Override
+    public Integer convertToInt(String str) {
+        return Integer.parseInt(str);
     }
 }

@@ -35,6 +35,7 @@ public class Parser {
     }
 
     public String parse(String input) {
+        input = input.strip();
         String[] params = input.split("\\s+");
         if (params.length != parsers.size()) {
             throw new IllegalArgumentException("Incorrect cron expression length, expected "
@@ -48,3 +49,18 @@ public class Parser {
         return out.toString();
     }
 }
+
+///*
+////* input: "*/15 0 1,15 JAN-JUN 1-3 /usr/bin/find"
+////        ```
+////
+////Will produce output like:
+////
+////        ```bash
+////minute        0 15 30 45
+////hour          0
+////day of month  1 15
+////month         1 2 3 4 5 6
+////day of week   1 2 3
+////command       /usr/bin/find
+//* */

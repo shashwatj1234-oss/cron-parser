@@ -20,16 +20,16 @@ public class StepStrategy implements ParseStrategy {
         if (!left.equals("*")) {
             if (left.contains("-")) {
                 String[] bounds = left.split("-", 2);
-                context.validate(bounds[0]);
-                context.validate(bounds[1]);
-                start = Integer.parseInt(bounds[0]);
-                end   = Integer.parseInt(bounds[1]);
+                context.validate(String.valueOf(context.convertToInt(bounds[0])));
+                context.validate(String.valueOf(context.convertToInt(bounds[1])));
+                start = context.convertToInt(bounds[0]);
+                end   = context.convertToInt(bounds[1]);
                 if (start > end) {
                     throw new IllegalArgumentException("Invalid ranged step: " + left + "/" + step + " for " + context.name());
                 }
             } else {
-                context.validate(left);
-                start = Integer.parseInt(left);
+                context.validate(String.valueOf(context.convertToInt(left)));
+                start = context.convertToInt(left);
             }
         }
 
